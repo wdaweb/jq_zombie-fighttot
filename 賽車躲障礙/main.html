@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/bootstrap.css">
+  <title>Document</title>
+  <style>
+    #game {
+      width: 1000px;
+      height: 553px;
+      background-image: url(./9qaK.gif);
+      background-repeat: no-repeat;
+      overflow: hidden;
+      position: relative;
+      margin: auto;
+      background-size: contain;
+    }
+
+    .block1 {
+      position: absolute;
+      width: 0px;
+      height: 0px;
+      background-color: rgba(240, 235, 235, 0.5);
+      background-image: url(./55555555.png);
+      background-size: contain;
+      border-radius: 50%;
+      margin: 0px;
+      padding: 0px;
+      left: 500px;
+      top: 230px;
+    }
+
+    .block2 {
+      position: absolute;
+      width: 0px;
+      height: 0px;
+      background-color: rgba(110, 108, 108, 0.6);
+      background-image: url(./55555555.png);
+      background-size: contain;
+      border-radius: 50%;
+      margin: 0px;
+      padding: 0px;
+      left: 500px;
+      top: 230px;
+    }
+
+    .block3 {
+      position: absolute;
+      width: 0px;
+      height: 0px;
+      background-color: rgba(70, 68, 68, 0.8);
+      background-image: url(./55555555.png);
+      background-size: contain;
+      border-radius: 50%;
+      margin: 0px;
+      padding: 0px;
+      left: 500px;
+      top: 230px;
+    }
+
+    .block4 {
+      position: absolute;
+      width: 0px;
+      height: 0px;
+      background-color: rgba(32, 32, 32, 1);
+      background-image: url(./55555555.png);
+      background-size: contain;
+      border-radius: 50%;
+      margin: 0px;
+      padding: 0px;
+      left: 500px;
+      top: 230px;
+
+    }
+
+    #car {
+      position: absolute;
+      width: 200px;
+      height: 133px;
+      background-image: url(./2.png);
+      background-size: contain;
+      background-repeat: no-repeat;
+      margin: 0px;
+      padding: 0px;
+      top: 420px;
+      left: 400px;
+      z-index: 1;
+    }
+
+    #car2 {
+      position: absolute;
+      width: 200px;
+      height: 100px;
+      background-image: url(./4.png);
+      margin: 0px;
+      padding: 0px;
+      top: 553px;
+      left: 400px;
+      z-index: 1;
+      background-size: 67px 100px;
+      background-position: center top;
+      background-repeat: no-repeat;
+    }
+
+    .bbc:hover {
+      transform: scale(1.5);
+    }
+
+    .container {
+      background-color: rgb(83, 21, 226);
+      border-radius: 20px;
+      height: 700px;
+    }
+
+    .container p {
+      color: rgb(181, 247, 0);
+    }
+
+    .container input {
+      border-radius: 15px;
+      box-shadow: 5px 5px 10px rgb(144, 146, 14);
+      background-color: aquamarine;
+      color: red;
+      font-weight: bolder;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container mt-5">
+    <h1 style="margin: 0;padding: 0; text-align: center; color: rgb(181, 247, 0);">躲避坑洞</h1>
+    <div class="row align-items-center mt-4" style="position: relative;">
+      <div class="col-md-2 col" style="text-align: center;">
+        <input type="button" value="開始" tabindex="-1" id="btn-start">
+
+        <input type="button" value="暫停" tabindex="-1" id="aa">
+        <input type="button" value="繼續" tabindex="-1" id="bb">
+        <p class="mt-3">最持久玩家: <span id="text-highscorename">沒有人</span></p>
+        <p>最持久秒數: <span id="text-highscore">0</span></p>
+        <p>過了: <span id="text-time">0</span> 秒</p>
+        <div class="card" style="border: 0; text-align: left;">
+          <img src="./未命名-1.jpg" class="card-img-top bbc"
+            style="border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">
+          <div class="card-body" style="background-color: brown; color: aqua;">
+            <h5 class="card-title">遊玩說明</h5>
+            <ul class="card-text" style="font-size: 8px;">
+              <li>可以使用鍵盤控制，方向鍵往左往右，空白鍵衝刺</li>
+              <li>汽車不可以與裂縫重疊，車頭也不能碰到裂縫，不然會掉落</li>
+              <li>汽車衝刺可以噴射加速，往前衝刺時可以略過裂縫，但在加速結束後如果碰到裂縫一樣會掉落</li>
+            </ul>
+
+
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-md-10 col">
+        <div class="row justify-content-center">
+          <div id="game">
+            <!-- <div class="block2" style="height: 50px; width: 333px; top: 230px;left: 333px;opacity: 0.5;"></div> -->
+            <!-- <div id="car2"></div> -->
+          </div>
+          <input type="button" value="往左" tabindex="-1" id="btn-left" class="col col-lg-3">
+          <input type="button" value="衝刺" tabindex="-1" id="gogo" class="col col-lg-3">
+          <input type="button" value="往右" tabindex="-1" id="btn-right" class="col col-lg-3">
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="./jquery-3.6.4.min.js"></script>
+  <script src="./js/bootstrap.bundle.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+
+    let timeconst = 0
+    let timer = 0
+
+    const highscore = localStorage.speed ? JSON.parse(localStorage.speed) : { name: '沒有人', score: 0 }
+    $('#text-highscorename').text(highscore.name)
+    $('#text-highscore').text(highscore.score)
+
+    $(document).keydown(function (event) {
+      if (event.keyCode === 39) {
+        $('#car').stop(true, true)
+        $('#car2').stop(true, true)
+        if (parseInt($('#car').css('left')) < 700 && parseInt($('#car').css('top')) === 420) {
+          $('#car').animate({ left: '+=300px' }, 'fast')
+          $('#car2').animate({ left: '+=300px' }, 'fast')
+        }
+      } else if (event.keyCode === 37) {
+        $('#car').stop(true, true)
+        $('#car2').stop(true, true)
+        if (parseInt($('#car').css('left')) > 100 && parseInt($('#car').css('top')) === 420) {
+          $('#car').animate({ left: '-=300px' }, 'fast')
+          $('#car2').animate({ left: '-=300px' }, 'fast')
+        }
+      }
+    })
+
+
+
+    $('#btn-left').click(function () {
+      $('#car').stop(true, true)
+      if (parseInt($('#car').css('left')) > 200) {
+        $('#car').stop(true, true)
+        $('#car2').stop(true, true)
+        if (parseInt($('#car').css('left')) > 100 && parseInt($('#car').css('top')) === 420) {
+          $('#car').animate({ left: '-=300px' }, 'fast')
+          $('#car2').animate({ left: '-=300px' }, 'fast')
+        }
+      }
+    })
+    $('#btn-right').click(function () {
+      $('#car').stop(true, true)
+      $('#car2').stop(true, true)
+      if (parseInt($('#car').css('left')) < 700 && parseInt($('#car').css('top')) === 420) {
+        $('#car').animate({ left: '+=300px' }, 'fast')
+        $('#car2').animate({ left: '+=300px' }, 'fast')
+      }
+    })
+
+
+
+    $(document).keydown(function (event) {
+      if (event.keyCode === 32) {
+        // event.stopPropagation()
+        // $('#gogo').focus();
+        // jump($('#car'))
+        $('input[type=button]').blur()
+        $('#gogo').click()
+      }
+
+    })
+
+    $('#gogo').click(function () {
+      jump($('#car'))
+    })
+
+
+
+    $('#btn-start').click(function () {
+      timeconst = 0
+      $(this).attr('disabled', true)
+
+      const car = $(`<div id="car"></div>`)
+      const car2 = $(`<div id="car2"></div>`)
+      $('#game').append(car)
+      $('#game').append(car2)
+
+      timer = setInterval(main, 100)
+
+
+    })
+
+
+    $('#aa').click(function () {
+      clearInterval(timer)
+    })
+
+    $('#bb').click(function () {
+      clearInterval(timer)
+      timer = setInterval(main, 100)
+    })
+
+
+
+
+
+    function main() {
+      timeconst++
+      $('#text-time').text(timeconst / 10)
+      const random = Math.ceil(Math.random() * 10)
+
+      if (timeconst / 10 < 10 && timeconst / 10 % 3 === 0) {
+        down(1)
+      } else if (timeconst / 10 > 10 &&
+        timeconst / 10 % 2 === 0 &&
+        timeconst / 10 < 21) {
+        down(2)
+      } else if (timeconst / 10 > 20 && timeconst / 10 % 1 === 0 && timeconst / 10 <= 30) {
+        down(3)
+      } else if (timeconst / 10 > 30 && timeconst / 5 % 1 === 0 && random > 5) { down(4) }
+
+      $('.block1').each(function () {
+        dis(this, 1)
+      })
+      $('.block2').each(function () {
+        dis(this, 2)
+      })
+      $('.block3').each(function () {
+        dis(this, 3)
+      })
+      $('.block4').each(function () {
+        dis(this, 4)
+      })
+    }
+
+
+    function down(a1) {
+      const left = Math.round(Math.random() * 2) * 200
+
+      const block = $(`<div class="block${a1}";></div>`)
+      $('#game').append(block)
+      move(block)
+    }
+
+    function dis(a1, b1) {
+      if (parseInt($(a1).css('top')) >= 552) {
+        $(a1).removeClass(`block${b1}`)
+      }
+
+      if (parseInt($(a1).css('top')) > 410 &&
+        parseInt($(a1).css('top')) < 520 &&
+        parseInt($(a1).css('left')) >= 333 &&
+        parseInt($(a1).css('left')) < 381 &&
+        parseInt($('#car').css('left')) === 400 &&
+        parseInt($('#car').css('top')) === 420
+      ) {
+        ans()
+      } else if (
+        parseInt($(a1).css('top')) > 410 &&
+        parseInt($(a1).css('top')) < 520 &&
+        parseInt($(a1).css('left')) <= 135 &&
+        parseInt($('#car').css('left')) === 100 &&
+        parseInt($('#car').css('top')) === 420
+      ) {
+        ans()
+      } else if (
+        parseInt($(a1).css('top')) > 410 &&
+        parseInt($(a1).css('top')) < 520 &&
+        parseInt($(a1).css('left')) >= 631 &&
+        parseInt($('#car').css('left')) === 700 &&
+        parseInt($('#car').css('top')) === 420
+      ) {
+
+        ans()
+      }
+
+
+    }
+
+
+    function ans() {
+
+      clearInterval(timer)
+      $('#game').html('')
+      $('#btn-start').attr('disabled', false)
+
+      if (timeconst / 10 > highscore.score) {
+        Swal.fire({
+          icon: 'info',
+          title: '時間到',
+          text: `最持久，你堅持了 ${timeconst / 10} 秒`,
+          input: 'text',
+          inputPlaceholder: '請輸入玩家名字',
+          inputAttributes: {
+            required: true
+          },
+          validationMessage: '名稱必填',
+          allowOutsideClick: false,
+          allowEscapeKey: false
+        }).then(function (result) {
+          highscore.name = result.value
+          highscore.score = timeconst / 10
+          $('#text-highscorename').text(highscore.name)
+          $('#text-highscore').text(highscore.score)
+          localStorage.speed = JSON.stringify(highscore)
+        })
+      } else {
+        Swal.fire({
+          icon: 'info',
+          title: 'GG 開進裂縫',
+          text: `你堅持 ${timeconst / 10} 秒.`
+        })
+      }
+
+
+    }
+
+
+
+    function move(block) {
+      const left1 = Math.round(Math.random() * 2) * 333
+      block.animate({
+        left: `${left1}px`,
+        top: '490px',
+        width: '333px',
+        height: '50px',
+      }, 2500, 'linear', function () {
+        block.animate({ top: '553px' }, 600, 'linear')
+      })
+    }
+
+    function jump(jump) {
+      // $('#car2').stop(true, false)
+      if (parseInt($('#car').css('left')) === 400) {
+        jump.animate({ top: '322px' }, 800, 'linear', function () {
+          jump.animate({ top: '420px' }, 800, 'linear')
+        })
+        $('#car2').animate({
+          top: `440px`,
+
+        }, 800, 'linear', function () {
+          $('#car2').animate({
+            top: `553px`
+          }, 800, 'linear')
+        })
+
+      } else if (parseInt($('#car').css('left')) === 100) {
+        jump.animate({ top: '322px', left: '200px' }, 800, 'linear', function () {
+          jump.animate({ top: '420px', left: '100px' }, 800, 'linear')
+        })
+        $('#car2').animate({
+          top: `440px`,
+          left: '200px',
+        }, 800, 'linear', function () {
+          $('#car2').animate({
+            top: `553px`, left: '100px'
+          }, 800, 'linear')
+        })
+      } else if (parseInt($('#car').css('left')) === 700) {
+        jump.animate({ top: '322px', left: '600px' }, 800, 'linear', function () {
+          jump.animate({ top: '420px', left: '700px' }, 800, 'linear')
+        })
+        $('#car2').animate({
+          top: `440px`,
+          left: '600px'
+        }, 800, 'linear', function () {
+          $('#car2').animate({
+            top: `553px`, left: '700px'
+          }, 800, 'linear')
+        })
+
+
+      }
+
+
+    }
+
+
+
+  </script>
+</body>
+
+</html>
